@@ -5,4 +5,4 @@ from django.apps import AppConfig
 
 class DCFConfig(AppConfig):
     name = 'dcf'
-    verbose_name = "DCF - Django Classified"
+    verbose_name = "Kid to Baby"

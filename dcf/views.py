@@ -2,11 +2,12 @@
 
 from django.core.exceptions import PermissionDenied
 from django.forms import inlineformset_factory
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.template import RequestContext
 from django.views.generic import DetailView, CreateView, UpdateView, ListView, DeleteView, TemplateView
 from django.utils.decorators import method_decorator
 from django.views.generic.detail import SingleObjectMixin
@@ -39,7 +40,7 @@ class FilteredListView(FormMixin, ListView):
 
 class IndexPageView(TemplateView):
 
-    template_name = "dcf/index.html"
+    template_name = "kidtobaby/index.html"
 
     def get_context_data(self, **kwargs):
         context = super(IndexPageView, self).get_context_data(**kwargs)
@@ -124,6 +125,40 @@ class GroupDetail(SingleObjectMixin, ListView):
 
     def get_queryset(self):
         return self.object.item_set.all()
+
+class SectionDetail(SingleObjectMixin, ListView):
+
+    paginate_by = 10
+    template_name = 'dcf/section_detail.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=Section.objects.all())
+        return super(SectionDetail, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(SectionDetail, self).get_context_data(**kwargs)
+        context['section'] = self.object
+
+        return context
+
+    def get_queryset(self):
+        return self.object.group_set.all()
+
+
+def catalogueView(request,
+                  pk,
+                  slug,
+                  template='kidtobaby/catalogue.html',
+                  page_template='kidtobaby/catalogue_page.html'
+                  ):
+    context = {
+        'groups': Group.objects.all(),
+        'items' : Item.objects.all(),
+        'page_template' : page_template,
+    }
+    # if request.is_ajax():
+    #     template = page_template
+    return render_to_response(template,context,context_instance=RequestContext(request))
 
 
 class ItemDetailView(DetailView):

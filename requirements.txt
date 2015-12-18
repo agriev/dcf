@@ -5,3 +5,5 @@ sorl-thumbnail
 unidecode
 django-bootstrap-form
 django_compressor
+django-debug-toolbar
+django-endless-pagination

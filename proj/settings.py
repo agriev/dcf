@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import os
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -105,6 +105,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.gzip.GZipMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware', #DEBUG
     'django.middleware.common.CommonMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
 
@@ -148,8 +149,9 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'bootstrapform',
     'compressor',
-
+    #'endless_pagination',
     'dcf',
+     'debug_toolbar',
 
 )
 
@@ -197,8 +199,8 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 AUTH_USER_MODEL = 'dcf.CustomUser'
 
 DCF = {
-    'SITE_NAME': u'Django DCF App',
-    'SITE_DESCRIPTION': u'Demo Classified Advertisements web site Powered by Django DCF app',
+    'SITE_NAME': u'Kid to Baby',
+    'SITE_DESCRIPTION': u'Меняйтесь вещами легко и непринуждённо',
     'ITEM_PER_USER_LIMIT': 20,
     'SITEMAP_LIMIT': 1000,
     'RSS_LIMIT': 100,
@@ -220,9 +222,20 @@ SOCIAL_AUTH_FACEBOOK_KEY = 'YOUR_FACEBOOK_OAUTH2_KEY_HERE'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'YOUR_FACEBOOK_OAUTH2_SECRET_HERE'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
+TEST_FACEBOOK_USER = 'testing_account'
+TEST_FACEBOOK_PASSWORD = 'password_for_testing_account'
+
+#SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['first_name', 'last_name', 'email', 'username']
+
 # TODO need app for store Project settings and allow edit them from Admin page (like DJBLETS)
 
 COMPRESS_ENABLED = True
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter',
     'compressor.filters.cssmin.CSSMinFilter']
+
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'django.core.context_processors.request',
+)
+

@@ -29,7 +29,8 @@ class GroupAdmin(admin.ModelAdmin):
 
 class SectionAdmin(admin.ModelAdmin):
 
-    list_display = ('title',)
+    list_display = ('title','slug')
+    search_fields = ('title', )
 
 
 class MyUserAdmin(UserAdmin):

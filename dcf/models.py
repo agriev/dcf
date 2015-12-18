@@ -43,14 +43,27 @@ class CurrencyField(models.DecimalField):
 
 
 class Section(models.Model):
-
+    slug = models.SlugField(blank=True, null=True)
     title = models.CharField(_('title'), max_length=100)
-
+    image = ImageField(_('image'), upload_to='images')
     def __unicode__(self):
         return self.title
 
-    def count(self):
-        return Item.objects.filter(is_active=True).filter(group__section=self).count()
+    # def count(self):
+    #     return Item.objects.filter(is_active=True).count()
+
+    # class Meta:
+    #     ordering = ['section__title', 'title', ]
+
+    def get_title(self):
+        return u'%s' % self.title
+
+    def save(self, *args, **kwargs):
+        if self.slug is None:
+            self.slug = slugify(unidecode(self.title))
+        super(Section, self).save(*args, **kwargs)
+    def get_absolute_url(self):
+        return reverse('section', kwargs={'pk': self.pk, 'slug': self.slug})
 
 
 class Group(models.Model):

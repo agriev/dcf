@@ -1,0 +1,131 @@
+.user-items-container {
+    margin-right:-9px;
+    margin-left:-9px;
+}
+
+.seller-info-container {
+    background:#f3f3f3;
+    text-align:center;
+    padding:25px;
+    text-transform:uppercase;
+    margin-bottom:20px;
+}
+
+.seller-info-container .avatar {
+    display:inline-block;
+    width:60px;
+    height:60px;
+    -webkit-border-radius:30px;
+    -moz-border-radius:30px;
+    border-radius:30px;
+    background:url(../img/hero_bg.jpg) no-repeat;
+    background-size:cover;
+    margin-bottom:10px;
+}
+
+.seller-info-container .name {
+    font-weight:700;
+    font-size:16px;
+    line-height:30px;
+    /*padding-top:10px;*/
+}
+.seller-info-container .location {
+    font-size:12px;
+    margin-bottom:20px;
+}
+
+.seller-info-container .contact-button {
+    width:40px;
+    height:40px;
+}
+
+.seller-categories-container {
+    text-align:left;
+}
+
+.seller-categories-container ul {
+    list-style:none;
+    text-transform:none;
+    padding:4px 0;
+    line-height:30px;
+}
+
+
+
+.catalog-categories a {
+    color:#81868e;
+    line-height:30px;
+    display:block;
+}
+
+.catalog-categories a.active, .catalog-categories a:hover {
+    color:#19bd9a;
+}
+
+.catalog-categories a.active {
+    font-weight:700;
+}
+
+
+.search-area {
+    background-color:#ffac22;
+    padding:15px 20px;
+    color:#fff;
+    margin:40px 0;
+}
+
+
+.ad-sized-container {
+    width:100%;
+    height:auto;
+    position:relative;
+    display:block;
+    margin-bottom:20px;
+}
+
+.ad-sized-container img.ad-image {
+    width:100%;
+    height:auto;
+}
+
+.ad-sized-container .ad-info {
+    position:absolute;
+    background:rgba(0,0,0,0.4);
+    opacity:0;
+    text-align:center;
+    top:0; left:0; bottom:0; right:0;
+    height: 100%;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transition:opacity .1s;
+    z-index:2;
+}
+
+.ad-sized-container .ad-info .vcenter {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.ad-sized-container .ad-info .name {
+    color:#fff;
+}
+
+.ad-sized-container .ad-info .user {
+    color:#d2d4d6;
+}
+
+.ad-sized-container .ad-info:hover {
+    opacity:1;
+}
+
+.ad-sized-container .ad-price {
+    position:absolute; bottom:20px; left:0;
+    background-color:#bf9143;
+    color:#fff;
+    font-size:16px;
+    padding:5px 7px;
+    z-index:1;
+}

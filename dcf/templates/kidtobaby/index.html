@@ -1,0 +1,175 @@
+{% extends "_base.html" %}
+
+{% block title %}{{settings.SITE_NAME}}{% endblock title %}
+
+{% block header %}
+{#{% include "kidtobaby/header.html" %}#}
+
+    <!-- HEADER -->
+
+<header class="hero-unit">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Меню</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="kidtobaby/img/logo.png">
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" data-toggle="modal" data-target="#registrationModal">Регистрация</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#loginModal">Войти</a></li>
+                    <li><a href="#">Помощь</a></li>
+                    <li><a href="#" class="btn btn-warning btn-link">Подать объявление</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <h1>дарите радость себе и детям</h1>
+    <h4>Мы знаем, что нужно детям. Мы ими были.</h4>
+
+
+    <!-- SEARCH BAR -->
+
+    <div class="search-bar-container">
+        <div class="search-bar">
+            <select class="selectpicker search-bar-field search-bar-item clearfix search-bar-category" title='Категория' data-size="auto">
+                <option>Одежда и обувь</option>
+                <option>Детская комната</option>
+                <option>Игрушки и книги</option>
+                <option>Детский транспорт</option>
+                <option>Автокресла</option>
+                <option>Другие товары</option>
+                <option>Коляски и аксессуары</option>
+            </select>
+
+            <input type="text" placeholder="Поиск по объявлению" class="search-bar-field search-bar-item clearfix search-bar-query form-control" />
+
+            <select class="selectpicker search-bar-field search-bar-item clearfix search-bar-city" title='Город' data-size="auto">
+                <option>Москва</option>
+                <option>Санкт-Петербург</option>
+                <option>Нижний Новгород</option>
+                <option>Екатеринбург</option>
+            </select>
+
+            <select class="selectpicker search-bar-field search-bar-item clearfix search-bar-metro" title='Станция метро' data-size="auto">
+                <option data-content="<span class='metro-circle metro-circle-cyan'></span>Фили">Фили</option>
+                <option data-content="<span class='metro-circle metro-circle-yellow'></span>Новогиреево">Новогиреево</option>
+                <option data-content="<span class='metro-circle metro-circle-violet'></span>Щукино">Щукино</option>
+                <option data-content="<span class='metro-circle metro-circle-yellow'></span>Новокосино">Новокосино</option>
+            </select>
+
+            <button class="btn btn-primary search-bar-submit search-bar-item clearfix">Найти</button>
+        </div>
+
+        <div class="hero-unit-button-down-container">
+            <a href="#" class="btn btn-primary btn-round hero-unit-button-down"><span class="glyphicon glyphicon-chevron-down"></span></a>
+        </div>
+    </div>
+
+    <!-- / SEARCH BAR -->
+
+</header>
+
+<!-- / HEADER -->
+
+
+{% endblock %}
+
+{% block body %}
+
+
+        <!-- CATEGORIES (static) -->
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <h2>Категории товаров</h2>
+                    <h5>Вы можете найти любые детские товары,<br>необходимые вашему ребенку.</h5>
+
+                    <div class="categories-showcase">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-8">
+                                    <a href="{{ sections.first.get_absolute_url }}" class="category-element" style="background: url({{ sections.first.image.url }})">
+                                        <h3>{{ sections.first.title }}</h3>
+                                    </a>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    {% for section in sections|slice:"1:2" %}
+                                    <a href="{{ section.get_absolute_url }}" class="category-element" style="background: url({{ section.image.url }})">
+                                        <h3>{{ section.title }}</h3>
+                                    </a>
+                                    {%  endfor %}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                {% for section in sections|slice:"2:5" %}
+                                    <div class="col-xs-12 col-sm-4">
+                                        <a href="{{ section.get_absolute_url }}" class="category-element" style="background: url({{ section.image.url }})">
+                                            <h3>{{ section.title }}</h3>
+                                        </a>
+                                    </div>
+                                {%  endfor %}
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-4">
+                                    <a href="{{ sections.last.get_absolute_url }}" class="category-element" style="background: url({{ sections.last.image.url }})">
+                                        <h3>{{ sections.last.title }}</h3>
+                                    </a>
+                                </div>
+                                <div class="col-xs-12 col-sm-8">
+                                    {% for section in sections|slice:"5:6" %}
+                                    <a href="{{ section.get_absolute_url }}" class="category-element" style="background: url({{ section.image.url }})">
+                                        <h3>{{ section.title }}</h3>
+                                    </a>
+                                    {%  endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- / CATEGORIES -->
+
+{#        {% for section in sections %}#}
+{#            {% if forloop.first %}<div class="row marketing">{% endif %}#}
+{##}
+{#        <div class="col-lg-4">#}
+{#            <h4>{{ section }}</h4>#}
+{##}
+{#            {% for group in section.group_set.all %}#}
+{#                {% if group.count > 0 %}#}
+{#                    <a href='{{ group.get_absolute_url }}' title="{{ group.get_title }}">{{group.title}} [{{group.count}}]</a><br/>#}
+{#                {% endif %}#}
+{#            {% endfor %}#}
+{#        </div>#}
+{##}
+{#        {% if forloop.counter|divisibleby:3 %}</div><div class="row marketing">{% endif %}#}
+{#        {% if forloop.last %}</div>{% endif %}#}
+{#        {% endfor %}#}
+
+{% endblock %}
+
+{% block modals %}
+    {% include "kidtobaby/modals.html" %}
+{% endblock %}
